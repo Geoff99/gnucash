@@ -58,8 +58,8 @@ gnc_commodity * gnc_import_select_commodity(const char * cusip,
     const gnc_commodity_table * commodity_table = gnc_get_current_commodities ();
     gnc_commodity * retval = NULL;
     gnc_commodity * tmp_commodity = NULL;
-    char * tmp_commodity_cusip = NULL;
-    int * max_cusip_len = 0;
+    const char * tmp_commodity_cusip = NULL;
+    size_t * max_cusip_len = 0;
     char * tmp_namespace = NULL;
     GList * commodity_list = NULL;
     GList * namespace_list = NULL;
@@ -95,7 +95,7 @@ gnc_commodity * gnc_import_select_commodity(const char * cusip,
             if (tmp_commodity_cusip != NULL &&
                     strlen(tmp_commodity_cusip) > max_cusip_len)
             {
-                max_cusip_len = strlen(tmp_commodity_cusip)
+                max_cusip_len = strlen(tmp_commodity_cusip);
             }
             
             DEBUG("Geoffs version of looking at commodity %s", gnc_commodity_get_fullname(tmp_commodity));
