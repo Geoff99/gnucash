@@ -59,7 +59,7 @@ gnc_commodity * gnc_import_select_commodity(const char * cusip,
     gnc_commodity * retval = NULL;
     gnc_commodity * tmp_commodity = NULL;
     const char * tmp_commodity_cusip = NULL;
-    size_t * max_cusip_len = 0;
+    const size_t * max_cusip_len = 0;
     char * tmp_namespace = NULL;
     GList * commodity_list = NULL;
     GList * namespace_list = NULL;
@@ -91,18 +91,18 @@ gnc_commodity * gnc_import_select_commodity(const char * cusip,
             tmp_commodity = commodity_list->data;
             
             tmp_commodity_cusip = gnc_commodity_get_cusip(tmp_commodity);
-            max_cusip_len = strlen(cusip);
+            *max_cusip_len = strlen(cusip);
             if (tmp_commodity_cusip != NULL &&
-                    strlen(tmp_commodity_cusip) > max_cusip_len)
+                    strlen(tmp_commodity_cusip) > *max_cusip_len)
             {
-                max_cusip_len = strlen(tmp_commodity_cusip);
+                *max_cusip_len = strlen(tmp_commodity_cusip);
             }
             
             DEBUG("Geoffs version of looking at commodity %s", gnc_commodity_get_fullname(tmp_commodity));
 
             if (gnc_commodity_get_cusip(tmp_commodity) != NULL &&
                     cusip != NULL &&
-                    strncmp(gnc_commodity_get_cusip(tmp_commodity), cusip, max_cusip_len) == 0)
+                    strncmp(gnc_commodity_get_cusip(tmp_commodity), cusip, *max_cusip_len) == 0)
             {
                 retval = tmp_commodity;
                 DEBUG("Commodity %s%s", gnc_commodity_get_fullname(retval), " matches.");
