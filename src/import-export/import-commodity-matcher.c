@@ -59,7 +59,7 @@ gnc_commodity * gnc_import_select_commodity(const char * cusip,
     gnc_commodity * retval = NULL;
     gnc_commodity * tmp_commodity = NULL;
     const char * tmp_commodity_cusip = NULL;
-    const size_t * max_cusip_len = 0;
+    size_t * max_cusip_len = 0;
     char * tmp_namespace = NULL;
     GList * commodity_list = NULL;
     GList * namespace_list = NULL;
